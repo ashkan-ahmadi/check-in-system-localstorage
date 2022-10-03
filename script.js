@@ -29,13 +29,18 @@ const toastify = (message, type = 'success') => {
   }).showToast();
 }
 
-if (!get('tickets')) {
-  tickets = originalTickets
-  store('tickets', stringify(tickets))
-  toastify('New tickets loaded successfully')
-} else {
-  tickets = parse(get('tickets'))
+const initialize = () => {
+  if (!get('tickets')) {
+    tickets = originalTickets
+    store('tickets', stringify(tickets))
+    toastify('New tickets loaded successfully')
+  } else {
+    tickets = parse(get('tickets'))
+  }
 }
+
+initialize()
+
 
 const render = (tickets) => {
   sortTickets(tickets)
